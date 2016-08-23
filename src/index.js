@@ -1,13 +1,14 @@
 import React from 'react';
-import {render} from 'react-dom';
-import FormBase from './formBase';
+import ReactDOM from 'react-dom';
+import store from './store';
+import {Provider} from 'react-redux'
+import {FormBase} from './formBase/index.js';
 
 require("../assets/styles/app.scss");
 
-class App extends React.Component {
-  render () {
-    return <FormBase name="World"/>;
-  }
-}
-
-render(<App/>, document.getElementById('app'));
+ReactDOM.render(
+	<Provider store={store}>
+		<FormBase/>
+	</Provider>,
+	document.getElementById('app')
+);

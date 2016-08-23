@@ -1,11 +1,11 @@
-import React from "react";
+import * as formBaseActions from './actions';
+import * as formBaseActionTypes from './actionTypes';
+import formBaseReducer from './reducer';
+import FormBase from './components/FormBase.js';
 
-export default React.createClass({
-  render: function() {
-    return (
-      <div className="greeting">
-        Hello, {this.props.name}!
-      </div>
-    );
-  },
-});
+module.exports = {
+  formBaseActions: formBaseActions,
+  formBaseActionTypes: formBaseActionTypes,
+  formBaseReducer: formBaseReducer,
+  FormBase: FormBase
+};
