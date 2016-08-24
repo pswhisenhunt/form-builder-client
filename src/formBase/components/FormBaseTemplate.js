@@ -12,7 +12,6 @@ const FormBaseTemplate = (props) => {
       }
       <input
         className="base-name"
-        defaultValue={props.name}
         value={props.name}
         onChange={ (event) => props.handleFormNameChange(props.setFormName, event.target.value) }
         onBlur={ () => props.handleFormSave(props.saveFormBase, props._id, props.name, props.controls)}
