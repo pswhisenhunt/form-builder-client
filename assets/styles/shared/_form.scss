@@ -1,0 +1,23 @@
+.form {
+  min-height: 300px;
+  .base-name {
+    height: 50px;
+    border: none;
+    outline: none;
+    font-size: 22px;
+    text-decoration: underline;
+    color: $medium-grey;
+  }
+  ::-webkit-input-placeholder {
+     text-decoration: underline;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+     text-decoration: underline;
+  }
+  ::-moz-placeholder {  /* Firefox 19+ */
+     text-decoration: underline;
+  }
+  :-ms-input-placeholder {
+     text-decoration: underline;
+  }
+};
