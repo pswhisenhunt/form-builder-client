@@ -1,8 +1,8 @@
 const initialState = {
   name: '',
-  saved: '',
   _id: '',
-  controls: []
+  controls: [],
+  saved: ''
 };
 
 export default function formBaseReducer(state = initialState, action) {
@@ -21,10 +21,10 @@ export default function formBaseReducer(state = initialState, action) {
       break;
     case 'SET_STATE':
       return {
-        saved: state.saved,
-        _id: action.payload._id,
-        controls: action.payload.controls,
-        name: action.payload.name
+        saved: action.payload.saved || state.saved,
+        _id: action.payload._id || '',
+        controls: action.payload.controls || [],
+        name: action.payload.name || ''
       };
       break;
     default:

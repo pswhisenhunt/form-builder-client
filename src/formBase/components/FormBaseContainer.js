@@ -1,8 +1,8 @@
 import React from 'react';
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {setFormName, saveFormBase} from '../actions';
-import {handleFormNameChange, handleFormSave} from '../handlers';
+import {setFormName, saveFormBase, deleteForm} from '../actions';
+import {handleFormNameChange, handleFormSave, handleDeleteForm} from '../handlers';
 import FormBaseTemplate from './FormBaseTemplate';
 
 class FormBaseContainer extends React.Component {
@@ -10,17 +10,21 @@ class FormBaseContainer extends React.Component {
     super(props);
     this.handleFormNameChange = handleFormNameChange.bind(this);
     this.handleFormSave = handleFormSave.bind(this);
+    this.handleDeleteForm = handleDeleteForm.bind(this);
   }
   render() {
     let boundActionSetFormName = bindActionCreators(setFormName, this.props.dispatch);
     let boundActionSaveForm = bindActionCreators(saveFormBase, this.props.dispatch);
+    let boundActionDeleteForm = bindActionCreators(deleteForm, this.props.dispatch);
     return (
       <FormBaseTemplate
         {...this.props}
         setFormName={boundActionSetFormName}
         saveFormBase={boundActionSaveForm}
+        deleteForm={boundActionDeleteForm}
         handleFormNameChange={this.handleFormNameChange}
         handleFormSave={this.handleFormSave}
+        handleDeleteForm={this.handleDeleteForm}
       />
     );
   }

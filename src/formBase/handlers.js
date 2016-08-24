@@ -1,7 +1,11 @@
-export function handleFormNameChange(props, formName) {
-  props.dispatch(props.setFormName(formName));
+export function handleFormNameChange(setFormName, formName) {
+  setFormName(formName);
 };
 
-export function handleFormSave(props) {
-  props.dispatch(props.saveFormBase(props.name, props.controls));
+export function handleFormSave(saveFormBase, _id, name, controls) {
+  saveFormBase(_id, name, controls);
+};
+
+export function handleDeleteForm(deleteForm, _id) {
+  deleteForm(_id);
 };

@@ -1,4 +1,9 @@
+@import 'globals/colors';
+@import 'shared/notifications';
+@import 'shared/form';
+
 #app {
-  background: black;
-  color: white;
+  min-height: 1200px;
+  border: 1px solid black;
+  padding: 10px;
 };
