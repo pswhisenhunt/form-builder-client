@@ -1,6 +1,8 @@
 import * as actionTypes from './actionTypes';
 import request from 'superagent';
 import {url} from '../../constants/api';
+import debug from 'debug';
+let log = debug('formBase:log');
 
 export function setFormName(value) {
   return {
@@ -32,8 +34,10 @@ export function saveFormBase(_id, name, controls) {
   } else {
     return (dispatch) => {
       if (!_id) {
+        log('Creating Form');
         dispatch(createForm(name, controls));
       } else {
+        log('Updating Form');
         dispatch(updateForm(_id, name, controls));
       }
     }
@@ -49,15 +53,16 @@ export function createForm(name, controls) {
       .end(function(err, res) {
         if (err) {
           // TODO have error handler here
+          log('Error: ', err);
           dispatch(setSaved(false));
         } else {
+          log('Success!');
           dispatch(setSaved(true));
           dispatch(setState(res.body));
         }
     });
   };
 };
-
 
 export function updateForm(_id, name, controls) {
   return (dispatch) => {
@@ -67,8 +72,10 @@ export function updateForm(_id, name, controls) {
       .set('Accept', 'application/json')
       .end(function(err, res) {
         if (err) {
+          log('Error: ', err);
           dispatch(setSaved(false));
         } else {
+          log('Success!');
           dispatch(setSaved(true));
           dispatch(setState(res.body));
         }
@@ -76,18 +83,18 @@ export function updateForm(_id, name, controls) {
   };
 };
 
-
 export function deleteForm(_id) {
   return (dispatch) => {
     request
       .del(url + '/form/' + _id)
       .end(function(err, res) {
         if (err) {
+          log('Error: ', err);
           return;
         } else {
+          log('Successfully deleted form');
           dispatch(setSaved(false));
           dispatch(setState({}));
-          //TODO have an error message displayed
         }
       });
   };

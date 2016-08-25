@@ -1,5 +1,6 @@
 const initialState = {
-  forms: []
+  forms: [],
+  active: {}
 };
 
 const tableReducer = (state = initialState, action) => {
@@ -7,6 +8,12 @@ const tableReducer = (state = initialState, action) => {
     case 'SET_FORMS':
       return {
         forms: action.payload
+      };
+      break;
+    case 'SET_ACTIVE_FORM':
+      return {
+        ...state,
+        active: action.payload
       };
       break;
     default:

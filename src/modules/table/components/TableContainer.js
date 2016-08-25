@@ -1,17 +1,28 @@
 import React from 'react';
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import * as actions from '../actions';
+import {handleSetForms, handleSetActiveForm} from '../handlers';
 import {TableTemplate} from './TableTemplate';
 
 class TableContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.handleSetActiveForm = handleSetActiveForm.bind(this);
   }
+
+  componentWillMount() {
+    let boundSetForms = bindActionCreators(actions.loadForms, this.props.dispatch);
+    handleSetForms(boundSetForms);
+  }
+
   render() {
-    console.log('inside table container...', this.props);
+    let boundSetActiveForm = bindActionCreators(actions.setActiveForm, this.props.dispatch);
     return(
       <TableTemplate
         {...this.props}
+        handleSetActiveForm={this.handleSetActiveForm}
+        setActiveForm={boundSetActiveForm}
       />
     );
   };
@@ -23,7 +34,7 @@ TableContainer.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    forms: state.forms
+    forms: state.tableReducer.forms
   };
 };
 

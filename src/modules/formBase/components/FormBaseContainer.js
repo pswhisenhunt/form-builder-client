@@ -32,7 +32,6 @@ class FormBaseContainer extends React.Component {
 
 FormBaseContainer.propTypes = {
   name: React.PropTypes.string,
-  dispatch: React.PropTypes.func.isRequired,
   controls: React.PropTypes.array,
   saved: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.string]),
   _id: React.PropTypes.string
