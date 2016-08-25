@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FormBaseTemplate = (props) => {
+const FormTemplate = (props) => {
   return (
     <form className="form">
       { props.saved ?
@@ -27,7 +27,7 @@ const FormBaseTemplate = (props) => {
   );
 };
 
-FormBaseTemplate.propTypes = {
+FormTemplate.propTypes = {
   handleFormNameChange: React.PropTypes.func.isRequired,
   handleFormSave: React.PropTypes.func.isRequired,
   handleDeleteForm: React.PropTypes.func.isRequired,
@@ -38,4 +38,4 @@ FormBaseTemplate.propTypes = {
   _id: React.PropTypes.string
 };
 
-export default FormBaseTemplate;
+export default FormTemplate;

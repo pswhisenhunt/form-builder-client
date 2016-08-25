@@ -1,11 +1,11 @@
 import React from 'react';
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {setFormName, saveFormBase, deleteForm} from '../actions';
-import {handleFormNameChange, handleFormSave, handleDeleteForm} from '../handlers';
-import FormBaseTemplate from './FormBaseTemplate';
+import {setFormName, saveFormBase, deleteForm} from '../actions/form';
+import {handleFormNameChange, handleFormSave, handleDeleteForm} from '../handlers/form';
+import FormTemplate from '../components/FormTemplate';
 
-class FormBaseContainer extends React.Component {
+class FormContainer extends React.Component {
   constructor(props) {
     super(props);
     this.handleFormNameChange = handleFormNameChange.bind(this);
@@ -17,7 +17,7 @@ class FormBaseContainer extends React.Component {
     let boundActionSaveForm = bindActionCreators(saveFormBase, this.props.dispatch);
     let boundActionDeleteForm = bindActionCreators(deleteForm, this.props.dispatch);
     return (
-      <FormBaseTemplate
+      <FormTemplate
         {...this.props}
         setFormName={boundActionSetFormName}
         saveFormBase={boundActionSaveForm}
@@ -30,7 +30,7 @@ class FormBaseContainer extends React.Component {
   }
 };
 
-FormBaseContainer.propTypes = {
+FormContainer.propTypes = {
   name: React.PropTypes.string,
   controls: React.PropTypes.array,
   saved: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.string]),
@@ -39,11 +39,9 @@ FormBaseContainer.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    name: state.formBaseReducer.name,
-    controls: state.formBaseReducer.controls,
-    saved: state.formBaseReducer.saved,
-    _id: state.formBaseReducer._id
+    name: state.form.name,
+    saved: state.form.saved,
   };
 };
 
-export default connect(mapStateToProps)(FormBaseContainer);
+export default connect(mapStateToProps)(FormContainer);

@@ -1,9 +1,11 @@
 const initialState = {
   forms: [],
-  active: {}
+  activeForm: {},
+  genericControls: [],
+  customControls: []
 };
 
-const tableReducer = (state = initialState, action) => {
+export default function app(state = initialState, action) {
   switch (action.type) {
     case 'SET_FORMS':
       return {
@@ -20,5 +22,3 @@ const tableReducer = (state = initialState, action) => {
       return state;
   };
 };
-
-export default tableReducer;

@@ -1,9 +1,9 @@
-import * as actionTypes from './actionTypes';
+import * as actionTypes from '../actionTypes/app';
 import request from 'superagent';
-import {url} from '../../constants/api';
+import {url} from '../constants/api';
 import debug from 'debug';
 
-let log = debug('table:log');
+let log = debug('app:log');
 
 export function setForms(forms) {
   return {

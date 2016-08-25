@@ -1,8 +1,8 @@
-import * as actionTypes from './actionTypes';
+import * as actionTypes from '../actionTypes/form';
 import request from 'superagent';
-import {url} from '../../constants/api';
+import {url} from '../constants/api';
 import debug from 'debug';
-let log = debug('formBase:log');
+let log = debug('form:log');
 
 export function setFormName(value) {
   return {
@@ -18,17 +18,9 @@ export function setSaved(bool) {
   };
 };
 
-export function setState(obj) {
-  return {
-    type: actionTypes.SET_STATE,
-    payload: obj
-  };
-};
-
 export function saveFormBase(_id, name, controls) {
   if (!name || name === "") {
     return (dispatch) => {
-      // TODO have error handler here
       dispatch(setSaved(false));
     };
   } else {
@@ -52,7 +44,6 @@ export function createForm(name, controls) {
       .set('Accept', 'application/json')
       .end(function(err, res) {
         if (err) {
-          // TODO have error handler here
           log('Error: ', err);
           dispatch(setSaved(false));
         } else {
