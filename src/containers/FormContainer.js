@@ -32,15 +32,13 @@ class FormContainer extends React.Component {
 
 FormContainer.propTypes = {
   name: React.PropTypes.string,
-  controls: React.PropTypes.array,
-  saved: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.string]),
-  _id: React.PropTypes.string
+  saved: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.string])
 };
 
 function mapStateToProps(state) {
   return {
     name: state.form.name,
-    saved: state.form.saved,
+    saved: state.form.saved
   };
 };
 

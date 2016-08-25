@@ -31,6 +31,7 @@ class AppContainer extends React.Component {
 };
 
 function mapStateToProps(state) {
+  console.log(state)
   return {
     forms: state.app.forms,
     activeForm: state.app.activeForm

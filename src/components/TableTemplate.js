@@ -7,7 +7,6 @@ export const TableTemplate = (props) => {
         return (
           <li key={form._id} onClick={(event) => {
             event.preventDefault();
-            console.log(form)
             props.handleSetActiveForm(props.setActiveForm, form);
           }}>
           {form.name}
