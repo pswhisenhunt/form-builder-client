@@ -8,7 +8,7 @@ require('../assets/styles/app.scss');
 
 ReactDOM.render(
 	<Provider store={store}>
-		<AppContainer/>
+		<AppContainer dispatch={store.dispatch}/>
 	</Provider>,
 	document.getElementById('app')
 );

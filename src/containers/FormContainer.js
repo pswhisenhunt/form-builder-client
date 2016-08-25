@@ -38,7 +38,8 @@ FormContainer.propTypes = {
 function mapStateToProps(state) {
   return {
     name: state.form.name,
-    saved: state.form.saved
+    saved: state.form.saved,
+    _id: state.app.activeForm._id
   };
 };
 
