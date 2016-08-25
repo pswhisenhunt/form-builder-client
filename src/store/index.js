@@ -1,10 +1,6 @@
 import thunkMiddleware from 'redux-thunk';
-import {compose, createStore, applyMiddleware, combineReducers} from 'redux';
-import {formBaseReducer} from '../formBase/index.js';
-
-let rootReducer = combineReducers({
-  formBaseReducer: formBaseReducer
-});
+import {compose, createStore, applyMiddleware} from 'redux';
+import rootReducer from '../modules/app/rootReducer';
 
 const store = createStore(
   rootReducer,

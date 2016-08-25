@@ -5,7 +5,7 @@ const initialState = {
   saved: ''
 };
 
-export default function formBaseReducer(state = initialState, action) {
+const formBaseReducer = (state = initialState, action) => {
   switch(action.type) {
     case 'SET_FORM_NAME':
       return {
@@ -31,3 +31,5 @@ export default function formBaseReducer(state = initialState, action) {
       return state;
   };
 };
+
+export default formBaseReducer;

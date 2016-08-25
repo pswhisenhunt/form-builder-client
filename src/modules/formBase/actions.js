@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 import request from 'superagent';
-import {url} from '../constants/api';
+import {url} from '../../constants/api';
 
 export function setFormName(value) {
   return {
