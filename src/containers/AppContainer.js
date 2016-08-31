@@ -1,21 +1,26 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {loadForms} from '../actions/app';
-import {handleSetForms} from '../handlers/shared';
+import {loadForms, loadControls} from '../actions/app';
+import {handleSetForms, handleSetControls} from '../handlers/shared';
 import ListContainer from './ListContainer';
 import FormContainer from './FormContainer';
+import ControlContainer from './ControlContainer';
 
 class AppContainer extends React.Component {
   constructor(props) {
     super(props);
     this.handleSetForms = handleSetForms.bind(this);
+    this.handleSetControls = handleSetControls.bind(this);
   }
 
   componentWillMount() {
     let boundLoadForms = bindActionCreators(loadForms, this.props.dispatch);
-    handleSetForms(boundLoadForms);
+    let boundControlForms = bindActionCreators(loadControls, this.props.dispatch);
+    this.handleSetForms(boundLoadForms);
+    this.handleSetControls(boundControlForms);
   }
+
   render() {
     return (
       <main>
@@ -25,7 +30,10 @@ class AppContainer extends React.Component {
                 <ListContainer/>
             </section>
             <section>
-                <FormContainer />
+                <FormContainer/>
+            </section>
+            <section>
+              <ControlContainer/>
             </section>
           </span>
           :
@@ -41,4 +49,5 @@ function mapStateToProps(state) {
     hasLoaded: state.app.hasLoaded
   };
 };
+
 export default connect(mapStateToProps)(AppContainer);

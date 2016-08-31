@@ -2,6 +2,7 @@ import * as actionTypes from '../actionTypes/form';
 import request from 'superagent';
 import {url} from '../constants/api';
 import debug from 'debug';
+import {createdItemSuccessfully} from './app';
 
 let log = debug('form:log');
 
@@ -29,6 +30,7 @@ export function setActiveForm(form) {
   };
 };
 
+
 export function saveForm(_id) {
   return (dispatch) => {
     if (!_id) {
@@ -47,7 +49,7 @@ export function createForm() {
     let form = state.form;
     delete form['saved'];
     request
-      .post(url + '/form')
+      .post(url + '/forms')
       .send(form)
       .set('Accept', 'application/json')
       .end(function(err, res) {
@@ -58,6 +60,7 @@ export function createForm() {
           log('Success!');
           dispatch(setSaved(true));
           dispatch(setActiveForm(res.body));
+          dispatch(createdItemSuccessfully(res.body));
         }
     });
   };
@@ -69,7 +72,7 @@ export function updateForm(_id) {
     let form = state.form;
     delete form['saved'];
     request
-      .put(url + '/form/' + _id)
+      .put(url + '/forms/' + _id)
       .send(form)
       .set('Accept', 'application/json')
       .end(function(err, res) {
@@ -88,7 +91,7 @@ export function updateForm(_id) {
 export function deleteForm(_id) {
   return (dispatch) => {
     request
-      .del(url + '/form/' + _id)
+      .del(url + '/forms/' + _id)
       .end(function(err, res) {
         if (err) {
           log('Error: ', err);
