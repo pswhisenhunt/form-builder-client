@@ -1,9 +1,9 @@
-export function handleFormNameChange(setFormName, formName) {
-  setFormName(formName);
+export function handleUpdateForm(updateFormValues, key, value) {
+  updateFormValues(key, value);
 };
 
-export function handleFormSave(saveFormBase, _id, name, controls) {
-  saveFormBase(_id, name, controls);
+export function handleFormSave(saveForm, _id) {
+  saveForm(_id);
 };
 
 export function handleDeleteForm(deleteForm, _id) {

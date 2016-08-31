@@ -13,12 +13,11 @@ const FormTemplate = (props) => {
       <input
         className="base-name"
         value={props.name}
-        onChange={ (event) => props.handleFormNameChange(props.setFormName, event.target.value) }
-        onBlur={ () => props.handleFormSave(props.saveFormBase, props._id, props.name, props.controls)}
+        onChange={ (event) => props.handleUpdateForm(props.updateFormValues, 'name', event.target.value)}
         onKeyDown={ (event) => {
           if (event.which === 13 || event.keyCode === 13) {
             event.preventDefault();
-            props.handleFormSave(props.saveFormBase, props._id, props.name, props.controls)
+            props.handleFormSave(props.saveForm, props._id)
           }
         }}
         placeholder='Form Name'
@@ -28,14 +27,15 @@ const FormTemplate = (props) => {
 };
 
 FormTemplate.propTypes = {
-  handleFormNameChange: React.PropTypes.func.isRequired,
-  handleFormSave: React.PropTypes.func.isRequired,
-  handleDeleteForm: React.PropTypes.func.isRequired,
-  setFormName: React.PropTypes.func.isRequired,
-  saveFormBase: React.PropTypes.func.isRequired,
-  deleteForm: React.PropTypes.func.isRequired,
+  handleUpdateForm: React.PropTypes.func,
+  handleFormSave: React.PropTypes.func,
+  handleDeleteForm: React.PropTypes.func,
+  saveForm: React.PropTypes.func,
+  deleteForm: React.PropTypes.func,
+  updateFormValues: React.PropTypes.func,
   name: React.PropTypes.string,
-  _id: React.PropTypes.string
+  _id: React.PropTypes.string,
+  controls: React.PropTypes.array
 };
 
 export default FormTemplate;

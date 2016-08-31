@@ -1,3 +1,5 @@
+import {loadForms} from '../actions/app';
+
 export function handleSetForms(loadForms) {
   loadForms();
 };

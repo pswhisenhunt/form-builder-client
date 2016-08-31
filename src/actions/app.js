@@ -12,12 +12,13 @@ export function setForms(forms) {
   };
 };
 
-export function setActiveForm(form) {
+export function setHasLoaded(bool) {
   return {
-    type: actionTypes.SET_ACTIVE_FORM,
-    payload: form
+    type: actionTypes.HAS_LOADED,
+    payload: bool
   };
 };
+
 
 export function loadForms() {
   return (dispatch) => {
@@ -30,6 +31,7 @@ export function loadForms() {
         } else {
           log('We got the forms!', res.body);
           dispatch(setForms(res.body));
+          dispatch(setHasLoaded(true));
         }
     });
   };

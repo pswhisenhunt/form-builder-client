@@ -1,8 +1,6 @@
 const initialState = {
   forms: [],
-  activeForm: {},
-  genericControls: [],
-  customControls: []
+  hasLoaded: false
 };
 
 export default function app(state = initialState, action) {
@@ -13,10 +11,10 @@ export default function app(state = initialState, action) {
         forms: action.payload
       };
       break;
-    case 'SET_ACTIVE_FORM':
+    case 'HAS_LOADED':
       return {
         ...state,
-        activeForm: action.payload
+        hasLoaded: action.payload
       };
       break;
     default:
