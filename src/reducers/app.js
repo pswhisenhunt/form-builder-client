@@ -1,24 +1,23 @@
 const initialState = {
   forms: [],
-  active: {}
+  hasLoaded: false
 };
 
-const tableReducer = (state = initialState, action) => {
+export default function app(state = initialState, action) {
   switch (action.type) {
     case 'SET_FORMS':
       return {
+        ...state,
         forms: action.payload
       };
       break;
-    case 'SET_ACTIVE_FORM':
+    case 'HAS_LOADED':
       return {
         ...state,
-        active: action.payload
+        hasLoaded: action.payload
       };
       break;
     default:
       return state;
   };
 };
-
-export default tableReducer;

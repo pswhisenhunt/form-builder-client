@@ -1,9 +1,9 @@
-import * as actionTypes from './actionTypes';
+import * as actionTypes from '../actionTypes/app';
 import request from 'superagent';
-import {url} from '../../constants/api';
+import {url} from '../constants/api';
 import debug from 'debug';
 
-let log = debug('table:log');
+let log = debug('app:log');
 
 export function setForms(forms) {
   return {
@@ -12,12 +12,13 @@ export function setForms(forms) {
   };
 };
 
-export function setActiveForm(form) {
+export function setHasLoaded(bool) {
   return {
-    type: actionTypes.SET_ACTIVE_FORM,
-    payload: form
+    type: actionTypes.HAS_LOADED,
+    payload: bool
   };
 };
+
 
 export function loadForms() {
   return (dispatch) => {
@@ -30,6 +31,7 @@ export function loadForms() {
         } else {
           log('We got the forms!', res.body);
           dispatch(setForms(res.body));
+          dispatch(setHasLoaded(true));
         }
     });
   };

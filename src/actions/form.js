@@ -1,13 +1,17 @@
-import * as actionTypes from './actionTypes';
+import * as actionTypes from '../actionTypes/form';
 import request from 'superagent';
-import {url} from '../../constants/api';
+import {url} from '../constants/api';
 import debug from 'debug';
-let log = debug('formBase:log');
 
-export function setFormName(value) {
+let log = debug('form:log');
+
+export function updateFormValues(key, value) {
   return {
-    type: actionTypes.SET_FORM_NAME,
-    payload: value
+    type: actionTypes.UPDATE_FORM,
+    payload: {
+      key: key,
+      value: value
+    }
   };
 };
 
@@ -18,57 +22,55 @@ export function setSaved(bool) {
   };
 };
 
-export function setState(obj) {
+export function setActiveForm(form) {
   return {
-    type: actionTypes.SET_STATE,
-    payload: obj
+    type: actionTypes.SET_ACTIVE_FORM,
+    payload: form
   };
 };
 
-export function saveFormBase(_id, name, controls) {
-  if (!name || name === "") {
-    return (dispatch) => {
-      // TODO have error handler here
-      dispatch(setSaved(false));
-    };
-  } else {
-    return (dispatch) => {
-      if (!_id) {
-        log('Creating Form');
-        dispatch(createForm(name, controls));
-      } else {
-        log('Updating Form');
-        dispatch(updateForm(_id, name, controls));
-      }
+export function saveForm(_id) {
+  return (dispatch) => {
+    if (!_id) {
+      log('Creating Form');
+      dispatch(createForm());
+    } else {
+      log('Updating Form');
+      dispatch(updateForm(_id));
     }
   };
 };
 
-export function createForm(name, controls) {
-  return (dispatch) => {
+export function createForm() {
+  return (dispatch, getState) => {
+    let state = getState();
+    let form = state.form;
+    delete form['saved'];
     request
       .post(url + '/form')
-      .send({name: name, controls: controls})
+      .send(form)
       .set('Accept', 'application/json')
       .end(function(err, res) {
         if (err) {
-          // TODO have error handler here
           log('Error: ', err);
           dispatch(setSaved(false));
         } else {
           log('Success!');
           dispatch(setSaved(true));
-          dispatch(setState(res.body));
+          dispatch(setActiveForm(res.body));
         }
     });
   };
 };
 
-export function updateForm(_id, name, controls) {
-  return (dispatch) => {
+export function updateForm(_id) {
+  return (dispatch, getState) => {
+    let state = getState();
+    let form = state.form;
+    delete form['saved'];
     request
       .put(url + '/form/' + _id)
-      .send({name: name, controls: controls})
+      .send(form)
       .set('Accept', 'application/json')
       .end(function(err, res) {
         if (err) {
@@ -77,7 +79,7 @@ export function updateForm(_id, name, controls) {
         } else {
           log('Success!');
           dispatch(setSaved(true));
-          dispatch(setState(res.body));
+          dispatch(setActiveForm(res.body));
         }
     });
   };
@@ -94,7 +96,6 @@ export function deleteForm(_id) {
         } else {
           log('Successfully deleted form');
           dispatch(setSaved(false));
-          dispatch(setState({}));
         }
       });
   };
