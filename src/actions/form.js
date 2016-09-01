@@ -1,14 +1,14 @@
-import * as actionTypes from '../actionTypes/form';
+import {UPDATE_FORM, SET_ACTIVE_FORM} from '../actionTypes/form';
 import request from 'superagent';
 import {url} from '../constants/api';
 import debug from 'debug';
-import {createdItemSuccessfully} from './app';
+import {formSuccessful, setSaved} from './app';
 
 let log = debug('form:log');
 
 export function updateFormValues(key, value) {
   return {
-    type: actionTypes.UPDATE_FORM,
+    type: UPDATE_FORM,
     payload: {
       key: key,
       value: value
@@ -16,16 +16,9 @@ export function updateFormValues(key, value) {
   };
 };
 
-export function setSaved(bool) {
-  return {
-    type: actionTypes.SET_SAVED,
-    payload: bool
-  };
-};
-
 export function setActiveForm(form) {
   return {
-    type: actionTypes.SET_ACTIVE_FORM,
+    type: SET_ACTIVE_FORM,
     payload: form
   };
 };
@@ -60,7 +53,7 @@ export function createForm() {
           log('Success!');
           dispatch(setSaved(true));
           dispatch(setActiveForm(res.body));
-          dispatch(createdItemSuccessfully(res.body));
+          dispatch(formSuccessful(res.body));
         }
     });
   };

@@ -24,11 +24,21 @@ export default function app(state = initialState, action) {
         hasLoaded: action.payload
       };
       break;
-    case 'CREATED_ITEM_SUCCESSFULLY':
+    case 'FORM_SUCCESSFUL':
       let forms = [].concat(state.forms);
-      forms.push(action.payload)
-      let newState = {forms: forms};
-      return Object.assign({}, state, newState);
+      forms.push(action.payload);
+      return {
+        ...state,
+        forms: forms
+      };
+      break;
+    case 'CONTROL_SUCCESSFUL':
+      let controls = [].concat(state.controls);
+      controls.push(action.payload);
+      return {
+        ...state,
+        controls: controls
+      };
       break;
     default:
       return state;

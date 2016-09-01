@@ -5,7 +5,8 @@ const initialState = {
   position: 0,
   isCustom: false,
   htmlClass: '',
-  htmlId: ''
+  htmlId: '',
+  saved: false
 };
 
 export default function control(state = initialState, action) {
@@ -20,6 +21,12 @@ export default function control(state = initialState, action) {
       return {
         ...state,
         ...action.payload
+      };
+      break;
+    case 'SET_SAVED':
+      return {
+        ...state,
+        saved: action.payload
       };
       break;
     default:

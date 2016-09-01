@@ -26,10 +26,24 @@ export function setHasLoaded(bool) {
   };
 };
 
-export function createdItemSuccessfully(item) {
+export function formSuccessful(item) {
   return {
-    type: actionTypes.CREATED_ITEM_SUCCESSFULLY,
+    type: actionTypes.FORM_SUCCESSFUL,
     payload: item
+  };
+};
+
+export function controlSuccessful(item) {
+  return {
+    type: actionTypes.CONTROL_SUCCESSFUL,
+    payload: item
+  };
+};
+
+export function setSaved(bool) {
+  return {
+    type: actionTypes.SET_SAVED,
+    payload: bool
   };
 };
 
@@ -44,7 +58,6 @@ export function loadForms() {
         } else {
           log('We got the forms!', res.body);
           dispatch(setForms(res.body));
-          dispatch(setHasLoaded(true));
         }
     });
   };
