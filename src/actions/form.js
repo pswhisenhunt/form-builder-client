@@ -1,13 +1,14 @@
-import * as actionTypes from '../actionTypes/form';
+import {UPDATE_FORM, SET_ACTIVE_FORM} from '../actionTypes/form';
 import request from 'superagent';
 import {url} from '../constants/api';
 import debug from 'debug';
+import {createFormSuccessful, deleteFormSuccessful, updateFormSuccessful, setSaved} from './app';
 
 let log = debug('form:log');
 
 export function updateFormValues(key, value) {
   return {
-    type: actionTypes.UPDATE_FORM,
+    type: UPDATE_FORM,
     payload: {
       key: key,
       value: value
@@ -15,19 +16,13 @@ export function updateFormValues(key, value) {
   };
 };
 
-export function setSaved(bool) {
-  return {
-    type: actionTypes.SET_SAVED,
-    payload: bool
-  };
-};
-
 export function setActiveForm(form) {
   return {
-    type: actionTypes.SET_ACTIVE_FORM,
+    type: SET_ACTIVE_FORM,
     payload: form
   };
 };
+
 
 export function saveForm(_id) {
   return (dispatch) => {
@@ -47,7 +42,7 @@ export function createForm() {
     let form = state.form;
     delete form['saved'];
     request
-      .post(url + '/form')
+      .post(url + '/forms')
       .send(form)
       .set('Accept', 'application/json')
       .end(function(err, res) {
@@ -58,6 +53,7 @@ export function createForm() {
           log('Success!');
           dispatch(setSaved(true));
           dispatch(setActiveForm(res.body));
+          dispatch(createFormSuccessful(res.body));
         }
     });
   };
@@ -69,7 +65,7 @@ export function updateForm(_id) {
     let form = state.form;
     delete form['saved'];
     request
-      .put(url + '/form/' + _id)
+      .put(url + '/forms/' + _id)
       .send(form)
       .set('Accept', 'application/json')
       .end(function(err, res) {
@@ -80,6 +76,7 @@ export function updateForm(_id) {
           log('Success!');
           dispatch(setSaved(true));
           dispatch(setActiveForm(res.body));
+          dispatch(updateFormSuccessful(res.body));
         }
     });
   };
@@ -88,7 +85,7 @@ export function updateForm(_id) {
 export function deleteForm(_id) {
   return (dispatch) => {
     request
-      .del(url + '/form/' + _id)
+      .del(url + '/forms/' + _id)
       .end(function(err, res) {
         if (err) {
           log('Error: ', err);
@@ -96,6 +93,7 @@ export function deleteForm(_id) {
         } else {
           log('Successfully deleted form');
           dispatch(setSaved(false));
+          dispatch(deleteFormSuccessful(_id));
         }
       });
   };

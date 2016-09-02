@@ -12,6 +12,13 @@ export function setForms(forms) {
   };
 };
 
+export function setControls(controls) {
+  return {
+    type: actionTypes.SET_CONTROLS,
+    payload: controls
+  };
+};
+
 export function setHasLoaded(bool) {
   return {
     type: actionTypes.HAS_LOADED,
@@ -19,11 +26,59 @@ export function setHasLoaded(bool) {
   };
 };
 
+export function createFormSuccessful(item) {
+  return {
+    type: actionTypes.CREATE_FORM_SUCCESSFUL,
+    payload: item
+  };
+};
+
+export function createControlSuccessful(item) {
+  return {
+    type: actionTypes.CREATE_CONTROL_SUCCESSFUL,
+    payload: item
+  };
+};
+
+export function deleteFormSuccessful(itemId) {
+  return {
+    type: actionTypes.DELETE_FORM_SUCCESSFUL,
+    payload: itemId
+  };
+};
+
+export function deleteControlSuccessful(itemId) {
+  return {
+    type: actionTypes.DELETE_CONTROL_SUCCESSFUL,
+    payload: itemId
+  };
+};
+
+export function updateFormSuccessful(item) {
+  return {
+    type: actionTypes.UPDATE_FORM_SUCCESSFUL,
+    payload: item
+  };
+};
+
+export function updateControlSuccessful(item) {
+  return {
+    type: actionTypes.UPDATE_CONTROL_SUCCESSFUL,
+    payload: item
+  };
+};
+
+export function setSaved(bool) {
+  return {
+    type: actionTypes.SET_SAVED,
+    payload: bool
+  };
+};
 
 export function loadForms() {
   return (dispatch) => {
     request
-      .get(url + '/form')
+      .get(url + '/forms')
       .end(function(err, res) {
         if (err) {
           log("Error: ", err);
@@ -31,6 +86,22 @@ export function loadForms() {
         } else {
           log('We got the forms!', res.body);
           dispatch(setForms(res.body));
+        }
+    });
+  };
+};
+
+export function loadControls() {
+  return (dispatch) => {
+    request
+      .get(url + '/controls')
+      .end(function(err, res) {
+        if (err) {
+          log("Error: ", err);
+          return;
+        } else {
+          log("We got the controls!", res.body);
+          dispatch(setControls(res.body));
           dispatch(setHasLoaded(true));
         }
     });
