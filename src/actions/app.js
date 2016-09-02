@@ -26,16 +26,44 @@ export function setHasLoaded(bool) {
   };
 };
 
-export function formSuccessful(item) {
+export function createFormSuccessful(item) {
   return {
-    type: actionTypes.FORM_SUCCESSFUL,
+    type: actionTypes.CREATE_FORM_SUCCESSFUL,
     payload: item
   };
 };
 
-export function controlSuccessful(item) {
+export function createControlSuccessful(item) {
   return {
-    type: actionTypes.CONTROL_SUCCESSFUL,
+    type: actionTypes.CREATE_CONTROL_SUCCESSFUL,
+    payload: item
+  };
+};
+
+export function deleteFormSuccessful(itemId) {
+  return {
+    type: actionTypes.DELETE_FORM_SUCCESSFUL,
+    payload: itemId
+  };
+};
+
+export function deleteControlSuccessful(itemId) {
+  return {
+    type: actionTypes.DELETE_CONTROL_SUCCESSFUL,
+    payload: itemId
+  };
+};
+
+export function updateFormSuccessful(item) {
+  return {
+    type: actionTypes.UPDATE_FORM_SUCCESSFUL,
+    payload: item
+  };
+};
+
+export function updateControlSuccessful(item) {
+  return {
+    type: actionTypes.UPDATE_CONTROL_SUCCESSFUL,
     payload: item
   };
 };

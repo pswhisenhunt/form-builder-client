@@ -1,5 +1,5 @@
 import {SET_ACTIVE_CONTROL, UPDATE_CONTROL} from '../actionTypes/control';
-import {controlSuccessful, setSaved} from './app';
+import {createControlSuccessful, deleteControlSuccessful, updateControlSuccessful, setSaved} from './app';
 import request from 'superagent';
 import {url} from '../constants/api';
 import debug from 'debug';
@@ -52,7 +52,7 @@ export function createControl() {
           log('Success created control!');
           dispatch(setSaved(true));
           dispatch(setActiveControl(res.body));
-          dispatch(controlSuccessful(res.body));
+          dispatch(createControlSuccessful(res.body));
         }
     });
   };
@@ -75,6 +75,7 @@ export function updateControl(_id) {
           log('Successfully updated control!');
           dispatch(setSaved(true));
           dispatch(setActiveControl(res.body));
+          dispatch(updateControlSuccessful(res.body));
         }
     });
   };
@@ -91,6 +92,7 @@ export function deleteControl(_id) {
         } else {
           log('Successfully deleted control');
           dispatch(setSaved(false));
+          dispatch(deleteControlSuccessful(_id));
         }
       });
   };

@@ -25,6 +25,9 @@ export default function form(state = initialState, action) {
         [action.payload.key]: action.payload.value
       };
       break;
+    case 'DELETE_FORM_SUCCESSFUL':
+      return Object.assign({}, state, initialState);
+      break;  
     default:
       return state;
   };

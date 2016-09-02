@@ -29,6 +29,9 @@ export default function control(state = initialState, action) {
         saved: action.payload
       };
       break;
+    case 'DELETE_CONTROL_SUCCESSFUL':
+      return Object.assign({}, state, initialState);
+      break;
     default:
       return state;
   };

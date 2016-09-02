@@ -2,7 +2,7 @@ import {UPDATE_FORM, SET_ACTIVE_FORM} from '../actionTypes/form';
 import request from 'superagent';
 import {url} from '../constants/api';
 import debug from 'debug';
-import {formSuccessful, setSaved} from './app';
+import {createFormSuccessful, deleteFormSuccessful, updateFormSuccessful, setSaved} from './app';
 
 let log = debug('form:log');
 
@@ -53,7 +53,7 @@ export function createForm() {
           log('Success!');
           dispatch(setSaved(true));
           dispatch(setActiveForm(res.body));
-          dispatch(formSuccessful(res.body));
+          dispatch(createFormSuccessful(res.body));
         }
     });
   };
@@ -76,6 +76,7 @@ export function updateForm(_id) {
           log('Success!');
           dispatch(setSaved(true));
           dispatch(setActiveForm(res.body));
+          dispatch(updateFormSuccessful(res.body));
         }
     });
   };
@@ -92,6 +93,7 @@ export function deleteForm(_id) {
         } else {
           log('Successfully deleted form');
           dispatch(setSaved(false));
+          dispatch(deleteFormSuccessful(_id));
         }
       });
   };

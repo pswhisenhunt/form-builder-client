@@ -23,7 +23,7 @@ class ControlContainer extends React.Component {
         handleDeleteControl={this.handleDeleteControl}
         handleUpdateControl={this.handleUpdateControl}
         saveControl={boundSaveControl}
-        updateControl={boundUpdateControl}
+        updateControlValues={boundUpdateControl}
         deleteControl={boundDeleteControl}
       />
     );
