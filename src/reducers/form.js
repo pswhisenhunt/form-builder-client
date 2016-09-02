@@ -5,12 +5,12 @@ const initialState = {
   saved: ''
 };
 
-export default function formBaseReducer(state = initialState, action) {
+export default function form(state = initialState, action) {
   switch(action.type) {
-    case 'SET_FORM_NAME':
+    case 'SET_ACTIVE_FORM':
       return {
         ...state,
-        name: action.payload
+        ...action.payload
       };
       break;
     case 'SET_SAVED':
@@ -19,14 +19,15 @@ export default function formBaseReducer(state = initialState, action) {
         saved: action.payload
       };
       break;
-    case 'SET_STATE':
+    case 'UPDATE_FORM':
       return {
-        saved: action.payload.saved || state.saved,
-        _id: action.payload._id || '',
-        controls: action.payload.controls || [],
-        name: action.payload.name || ''
+        ...state,
+        [action.payload.key]: action.payload.value
       };
       break;
+    case 'DELETE_FORM_SUCCESSFUL':
+      return Object.assign({}, state, initialState);
+      break;  
     default:
       return state;
   };
