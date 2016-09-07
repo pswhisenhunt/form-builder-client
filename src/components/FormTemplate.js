@@ -3,15 +3,14 @@ import React from 'react';
 const FormTemplate = (props) => {
   return (
     <form className="form">
-      { props.saved ?
-        <span>
+      { props._id ?
+        <div className="icon-container">
           <i className="fa fa-trash fa-lg remove" aria-hidden="true" onClick={(event) => {event.preventDefault(); props.handleDeleteForm(props.deleteForm, props._id)}}></i>
-          <i className="fa fa-check-circle fa-lg success" aria-hidden="true"></i>
-        </span>
+        </div>
         : null
       }
       <input
-        className="base-name"
+        className="input-basic title"
         value={props.name}
         onChange={ (event) => props.handleUpdateForm(props.updateFormValues, 'name', event.target.value)}
         onKeyDown={ (event) => {

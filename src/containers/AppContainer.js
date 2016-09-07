@@ -30,32 +30,41 @@ class AppContainer extends React.Component {
     let boundSetActiveForm = bindActionCreators(setActiveForm, this.props.dispatch);
     let boundSetActiveControl = bindActionCreators(setActiveControl, this.props.dispatch);
     return (
-      <main>
+      <main className="main">
         { this.props.hasLoaded ?
           <span>
-            <section>
+            <section className="section list">
+              <h1>Forms</h1>
               <ListTemplate
                 handleSetActive={this.handleSetActiveForm}
                 list={this.props.forms}
                 setActive={boundSetActiveForm}
               />
             </section>
-            <section>
+            <section className="section form">
               <FormContainer/>
             </section>
-            <section>
+            <section className="section list">
+              <h1>Controls</h1>
               <ListTemplate
                 handleSetActive={this.handleSetActiveControl}
                 list={this.props.controls}
                 setActive={boundSetActiveControl}
               />
             </section>
-            <section>
+            <section className="section form">
               <ControlContainer/>
             </section>
           </span>
           :
-          <section>Loading.....</section>
+          <section className="section loading">
+            <div className="spinner">
+              Loading
+              <div className="bounce1"></div>
+              <div className="bounce2"></div>
+              <div className="bounce3"></div>
+            </div>
+          </section>
         }
       </main>
     );

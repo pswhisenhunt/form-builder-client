@@ -1,23 +1,81 @@
 .form {
   min-height: 300px;
-  .base-name {
-    height: 50px;
+  .input-basic {
+    height: 30px;
     border: none;
     outline: none;
-    font-size: 22px;
+    display: block;
+
+    font-size: 18px;
+    font-family: $Abel;
     text-decoration: underline;
-    color: $medium-grey;
+    color: orange;
   }
   ::-webkit-input-placeholder {
      text-decoration: underline;
+     color: orange;
   }
   :-moz-placeholder { /* Firefox 18- */
      text-decoration: underline;
+     color: orange;
   }
   ::-moz-placeholder {  /* Firefox 19+ */
      text-decoration: underline;
+     color: orange;
   }
   :-ms-input-placeholder {
      text-decoration: underline;
+     color: orange;
+  }
+
+  .label {
+    margin-bottom: 10px;
+
+    font-size: 18px;
+  }
+
+  .input-select {
+    height: 10px;
+    width: 125px;
+    padding: 8px;
+    border: 1px solid $light-grey;
+    border-radius: 8px;
+    outline: none;
+
+    font-size: 16px;
+  }
+
+  .add {
+    margin-left: 5px;
+
+    color: $medium-green;
+  }
+
+  .select-option {
+    margin: 8px;
+    span {
+      font-size: 18px;
+      padding-left: 5px;
+    }
+  }
+
+  .title {
+    font-family: $Baloo;
+    font-size: 30px;
+    margin-top: 15px;
+  }
+
+  .input-checkbox {
+    width: 15px;
+    margin-left: 10px;
+    height: 15px;
+  }
+
+  .icon-container {
+    font-family: $Abel;
+    cursor: pointer;
+    i {
+      margin: 5px;
+    }
   }
 };

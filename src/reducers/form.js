@@ -8,10 +8,14 @@ const initialState = {
 export default function form(state = initialState, action) {
   switch(action.type) {
     case 'SET_ACTIVE_FORM':
-      return {
-        ...state,
-        ...action.payload
-      };
+      if(!action.payload) {
+        return initialState;
+      } else {
+        return {
+          ...state,
+          ...action.payload
+        };
+      }
       break;
     case 'SET_SAVED':
       return {
@@ -27,7 +31,7 @@ export default function form(state = initialState, action) {
       break;
     case 'DELETE_FORM_SUCCESSFUL':
       return Object.assign({}, state, initialState);
-      break;  
+      break;
     default:
       return state;
   };

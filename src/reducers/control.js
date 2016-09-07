@@ -6,7 +6,8 @@ const initialState = {
   isCustom: false,
   htmlClass: '',
   htmlId: '',
-  saved: false
+  saved: false,
+  option: ''
 };
 
 export default function control(state = initialState, action) {
@@ -17,11 +18,24 @@ export default function control(state = initialState, action) {
         [action.payload.key]: action.payload.value
       };
       break;
-    case 'SET_ACTIVE_CONTROL':
+    case 'ADD_OPTION':
+      var options = [].concat(state.options);
+      options.push(state.option);
       return {
         ...state,
-        ...action.payload
+        options: options,
+        option: ''
       };
+      break;
+    case 'SET_ACTIVE_CONTROL':
+      if (!action.payload) {
+        return initialState;
+      } else {
+        return {
+          ...state,
+          ...action.payload
+        };
+      }
       break;
     case 'SET_SAVED':
       return {
