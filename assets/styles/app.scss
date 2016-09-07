@@ -1,9 +1,54 @@
 @import 'globals/colors';
+@import 'globals/fonts';
 @import 'shared/notifications';
 @import 'shared/form';
+@import 'shared/list';
+@import 'shared/spinner';
+
 
 #app {
   min-height: 1200px;
-  border: 1px solid black;
+  width: 100%;
+  padding: 15px;
+
+  font-family: $Abel;
+  background-color: $super-light-blue;
+}
+
+input {
+  background-color: $super-light-blue;
+}
+
+.section {
+  border: 1px solid $light-grey;
+  border-radius: 8px;
+  height: 800px;
+  float: left;
   padding: 10px;
-};
+  margin: 5px;
+
+  color: $dark-blue;
+  h1 {
+    text-align: center;
+    font-family: $Baloo;
+  }
+}
+
+.list {
+  border: none;
+  padding: 0;
+  width: 10%;
+}
+
+.form {
+  width: 36%;
+}
+
+.loading {
+  width: 100%;
+  border: none;
+
+  font-size: 26px;
+  font-family: $Baloo;
+  color: $medium-blue;
+}

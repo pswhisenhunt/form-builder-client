@@ -3,14 +3,16 @@ import React from 'react';
 const CheckboxTemplate = (props) => {
   return (
     <div>
-      <label>Save to Custom?</label>
+      <label className="label">Save to Custom?</label>
       { props.value ?
         <input type="checkbox"
           checked
+          className="input-checkbox"
           onChange={ () => props.handleUpdate(props.update, props.name, false)}
         />
         :
         <input type="checkbox"
+          className="input-checkbox"
           onChange={ () => props.handleUpdate(props.update, props.name, true)}
         />
       }

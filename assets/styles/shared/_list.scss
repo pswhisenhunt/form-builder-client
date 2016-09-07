@@ -1,0 +1,16 @@
+ul {
+  li {
+    list-style-type: none;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    margin-left: -40%;
+  }:hover {
+    color: $medium-blue;
+  }
+}
+
+.active {
+  color: $medium-blue;
+  text-decoration: underline;
+}
