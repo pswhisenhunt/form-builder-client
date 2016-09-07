@@ -1,4 +1,4 @@
-import {SET_ACTIVE_CONTROL, UPDATE_CONTROL} from '../actionTypes/control';
+import {SET_ACTIVE_CONTROL, UPDATE_CONTROL, ADD_OPTION, SET_OPTION} from '../actionTypes/control';
 import {createControlSuccessful, deleteControlSuccessful, updateControlSuccessful, setSaved} from './app';
 import request from 'superagent';
 import {url} from '../constants/api';
@@ -23,6 +23,12 @@ export function setActiveControl(control) {
   };
 };
 
+export function addOptions() {
+  return {
+    type: ADD_OPTION
+  };
+};
+
 export function saveControl(_id) {
   return (dispatch) => {
     if (!_id) {
@@ -35,11 +41,19 @@ export function saveControl(_id) {
   };
 };
 
+function cleanForRequest(control) {
+  delete control['saved'];
+  delete control['option'];
+  if (control.options.length === 0) {
+    delete control['options'];
+  }
+  return control;
+};
+
 export function createControl() {
   return (dispatch, getState) => {
     let state = getState();
-    let control = state.control;
-    delete control['saved'];
+    let control = cleanForRequest(state.control);
     request
       .post(url + '/controls')
       .send(control)
@@ -61,8 +75,7 @@ export function createControl() {
 export function updateControl(_id) {
   return (dispatch, getState) => {
     let state = getState();
-    let control = state.control;
-    delete control['saved'];
+    let control = cleanForRequest(state.control);
     request
       .put(url + '/controls/' + _id)
       .send(control)

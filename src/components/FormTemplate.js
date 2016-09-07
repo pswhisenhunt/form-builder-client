@@ -11,7 +11,7 @@ const FormTemplate = (props) => {
         : null
       }
       <input
-        className="base-name"
+        className="input-basic"
         value={props.name}
         onChange={ (event) => props.handleUpdateForm(props.updateFormValues, 'name', event.target.value)}
         onKeyDown={ (event) => {

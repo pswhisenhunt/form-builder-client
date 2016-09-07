@@ -1,9 +1,11 @@
 .form {
   min-height: 300px;
-  .base-name {
+  .input-basic {
     height: 50px;
     border: none;
     outline: none;
+    display: block;
+
     font-size: 22px;
     text-decoration: underline;
     color: $medium-grey;
