@@ -6,18 +6,23 @@ const SelectTemplate = (props) => {
   if (props.options) {
     props.options.map((op, i) => {
       ops.push(
-        <div key={op + '-' + i}>{op}</div>
+        <div key={op + '-' + i} className="select-option">
+          <i className="fa fa-trash fa-lg remove" aria-hidden="true" onClick={(event) => {event.preventDefault()}}></i>
+          <span>{op}</span>
+        </div>
       );
     });
   };
   return (
     <div>
-      <label>Values to select from...</label>
-      <input name={props.name} onChange={(event) => {
+      <label className="label">Add Select Options</label>
+      <input name={props.name} className="input-select" onChange={(event) => {
         props.handleUpdate(props.update, 'option', event.target.value);
       }}/>
-      <button onClick={(event) => {event.preventDefault(); props.handleAdd(props.submitOptions)}}>Add</button>
-      <div>{ops}</div>
+      <i className="fa fa-plus-circle fa-lg add" aria-hidden="true" onClick={(event) => {event.preventDefault(); props.handleAdd(props.submitOptions)}}></i>
+      <div>
+        {ops}
+      </div>
     </div>
   );
 };

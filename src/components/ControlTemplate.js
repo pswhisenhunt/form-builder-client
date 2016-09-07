@@ -11,20 +11,27 @@ const ControlTemplate = (props) => {
           }
         }}
       >
-      { props.saved ?
-        <span>
+      { props._id ?
+        <div className="icon-container">
           <i className="fa fa-trash fa-lg remove" aria-hidden="true" onClick={(event) => {event.preventDefault(); props.handleDeleteControl(props.deleteControl, props._id)}}></i>
-          <i className="fa fa-check-circle fa-lg success" aria-hidden="true"></i>
-        </span>
+          <i className="fa fa-plus-circle fa-lg add" aria-hidden="true" onClick={(event) => {event.preventDefault()}}></i>
+          Add To Form
+        </div>
         : null
       }
       <InputTemplate
-        classname="input-basic"
+        classname="input-basic title"
         value={props.name}
         name="name"
         handleUpdate={props.handleUpdateControl}
         update={props.updateControlValues}
         placeholder="Control Name"
+      />
+      <CheckboxTemplate
+        name='isCustom'
+        value={props.isCustom}
+        handleUpdate={props.handleUpdateControl}
+        update={props.updateControlValues}
       />
       <InputTemplate
         classname="input-basic"
@@ -49,12 +56,6 @@ const ControlTemplate = (props) => {
         handleUpdate={props.handleUpdateControl}
         update={props.updateControlValues}
         placeholder="HTML id"
-      />
-      <CheckboxTemplate
-        name='isCustom'
-        value={props.isCustom}
-        handleUpdate={props.handleUpdateControl}
-        update={props.updateControlValues}
       />
       <SelectTemplate
         options={props.options}

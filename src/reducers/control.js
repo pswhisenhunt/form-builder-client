@@ -28,10 +28,14 @@ export default function control(state = initialState, action) {
       };
       break;
     case 'SET_ACTIVE_CONTROL':
-      return {
-        ...state,
-        ...action.payload
-      };
+      if (!action.payload) {
+        return initialState;
+      } else {
+        return {
+          ...state,
+          ...action.payload
+        };
+      }
       break;
     case 'SET_SAVED':
       return {
