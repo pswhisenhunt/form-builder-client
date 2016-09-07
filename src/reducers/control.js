@@ -6,7 +6,8 @@ const initialState = {
   isCustom: false,
   htmlClass: '',
   htmlId: '',
-  saved: false
+  saved: false,
+  option: ''
 };
 
 export default function control(state = initialState, action) {
@@ -15,6 +16,15 @@ export default function control(state = initialState, action) {
       return {
         ...state,
         [action.payload.key]: action.payload.value
+      };
+      break;
+    case 'ADD_OPTION':
+      var options = [].concat(state.options);
+      options.push(state.option);
+      return {
+        ...state,
+        options: options,
+        option: ''
       };
       break;
     case 'SET_ACTIVE_CONTROL':

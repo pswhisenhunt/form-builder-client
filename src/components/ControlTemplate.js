@@ -1,4 +1,7 @@
 import React from 'react';
+import InputTemplate from './elements/InputTemplate';
+import SelectTemplate from './elements/SelectTemplate';
+import CheckboxTemplate from './elements/CheckboxTemplate';
 
 const ControlTemplate = (props) => {
   return (
@@ -15,29 +18,51 @@ const ControlTemplate = (props) => {
         </span>
         : null
       }
-      <input
-        className="base-name"
+      <InputTemplate
+        classname="input-basic"
         value={props.name}
-        onChange={ (event) => props.handleUpdateControl(props.updateControlValues, 'name', event.target.value)}
+        name="name"
+        handleUpdate={props.handleUpdateControl}
+        update={props.updateControlValues}
         placeholder="Control Name"
       />
-      <input
-        className="base-name"
+      <InputTemplate
+        classname="input-basic"
         value={props.type}
-        onChange={ (event) => props.handleUpdateControl(props.updateControlValues, 'type', event.target.value)}
+        name="type"
+        handleUpdate={props.handleUpdateControl}
+        update={props.updateControlValues}
         placeholder="Control Type"
       />
-      <input
-        className="base-name"
+      <InputTemplate
+        classname="input-basic"
         value={props.htmlClass}
-        onChange={ (event) => props.handleUpdateControl(props.updateControlValues, 'htmlClass', event.target.value)}
-        placeholder="Control Class"
+        name="htmlClass"
+        handleUpdate={props.handleUpdateControl}
+        update={props.updateControlValues}
+        placeholder="HTML Class"
       />
-      <input
-        className="base-name"
+      <InputTemplate
+        classname="input-basic"
         value={props.htmlId}
-        onChange={ (event) => props.handleUpdateControl(props.updateControlValues, 'htmlId', event.target.value)}
-        placeholder="Control Class"
+        name="htmlId"
+        handleUpdate={props.handleUpdateControl}
+        update={props.updateControlValues}
+        placeholder="HTML id"
+      />
+      <CheckboxTemplate
+        name='isCustom'
+        value={props.isCustom}
+        handleUpdate={props.handleUpdateControl}
+        update={props.updateControlValues}
+      />
+      <SelectTemplate
+        options={props.options}
+        name='options'
+        handleUpdate={props.handleUpdateControl}
+        update={props.updateControlValues}
+        handleAdd={props.handleAddOptions}
+        submitOptions={props.addOptions}
       />
     </form>
   );
@@ -57,6 +82,8 @@ ControlTemplate.propTypes = {
   handleSaveControl: React.PropTypes.func,
   handleDeleteControl: React.PropTypes.func,
   handleUpdateControl: React.PropTypes.func,
+  handleAddOptions: React.PropTypes.func,
+  addOptions: React.PropTypes.func,
   saveControl: React.PropTypes.func,
   updateControlValues: React.PropTypes.func,
   deleteControl: React.PropTypes.func
