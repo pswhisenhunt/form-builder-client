@@ -1,5 +1,5 @@
-export function handleUpdateControl(updateControlValues, key, value) {
-  updateControlValues(key, value);
+export function handleUpdateControl(updateControlValues, id, key, value) {
+  updateControlValues(id, key, value);
 };
 
 export function handleSaveControl(saveControl, _id) {

@@ -5,17 +5,19 @@ import CheckboxTemplate from './elements/CheckboxTemplate';
 
 const ControlTemplate = (props) => {
   return (
-    <form className="form" onKeyDown={ (event) => { if (event.which === 13 || event.keyCode === 13) {
-            event.preventDefault();
+    <form
+      className={props.isNested ? 'form nested' : 'form'}
+      onKeyDown={ (event) => { if (event.which === 13 || event.keyCode === 13) {
+          event.preventDefault();
+          if (props.handleSaveControl) {
             props.handleSaveControl(props.saveControl, props._id)
           }
-        }}
+        }
+      }}
       >
       { props._id ?
         <div className="icon-container">
           <i className="fa fa-trash fa-lg remove" aria-hidden="true" onClick={(event) => {event.preventDefault(); props.handleDeleteControl(props.deleteControl, props._id)}}></i>
-          <i className="fa fa-plus-circle fa-lg add" aria-hidden="true" onClick={(event) => {event.preventDefault()}}></i>
-          Add To Form
         </div>
         : null
       }
@@ -23,6 +25,7 @@ const ControlTemplate = (props) => {
         classname="input-basic title"
         value={props.name}
         name="name"
+        id={props._id}
         handleUpdate={props.handleUpdateControl}
         update={props.updateControlValues}
         placeholder="Control Name"
@@ -30,6 +33,7 @@ const ControlTemplate = (props) => {
       <CheckboxTemplate
         name='isCustom'
         value={props.isCustom}
+        id={props._id}
         handleUpdate={props.handleUpdateControl}
         update={props.updateControlValues}
       />
@@ -37,6 +41,7 @@ const ControlTemplate = (props) => {
         classname="input-basic"
         value={props.type}
         name="type"
+        id={props._id}
         handleUpdate={props.handleUpdateControl}
         update={props.updateControlValues}
         placeholder="Control Type"
@@ -45,6 +50,7 @@ const ControlTemplate = (props) => {
         classname="input-basic"
         value={props.htmlClass}
         name="htmlClass"
+        id={props._id}
         handleUpdate={props.handleUpdateControl}
         update={props.updateControlValues}
         placeholder="HTML Class"
@@ -53,6 +59,7 @@ const ControlTemplate = (props) => {
         classname="input-basic"
         value={props.htmlId}
         name="htmlId"
+        id={props._id}
         handleUpdate={props.handleUpdateControl}
         update={props.updateControlValues}
         placeholder="HTML id"
@@ -60,11 +67,21 @@ const ControlTemplate = (props) => {
       <SelectTemplate
         options={props.options}
         name='options'
+        id={props._id}
         handleUpdate={props.handleUpdateControl}
         update={props.updateControlValues}
         handleAdd={props.handleAddOptions}
         submitOptions={props.addOptions}
       />
+      { props.isNested ?
+        null :
+        <button
+          className="btn save"
+          onClick={(event) => {event.preventDefault(); props.handleSaveControl(props.saveControl, props._id)}}
+          >
+          Save
+        </button>
+      }
     </form>
   );
 };

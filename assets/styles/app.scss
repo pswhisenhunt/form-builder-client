@@ -1,5 +1,6 @@
 @import 'globals/colors';
 @import 'globals/fonts';
+@import 'shared/button';
 @import 'shared/notifications';
 @import 'shared/form';
 @import 'shared/list';
@@ -22,7 +23,6 @@ input {
 .section {
   border: 1px solid $light-grey;
   border-radius: 8px;
-  height: 800px;
   float: left;
   padding: 10px;
   margin: 5px;
