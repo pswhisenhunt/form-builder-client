@@ -1,9 +1,10 @@
 import React from 'react';
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {saveForm, deleteForm, updateFormValues} from '../actions/form';
-import {handleFormSave, handleDeleteForm, handleUpdateForm} from '../handlers/form';
+import {saveForm, deleteForm, updateFormValues, updateFormControl} from '../actions/form';
+import {handleFormSave, handleDeleteForm, handleUpdateForm, handleUpdateFormControl} from '../handlers/form';
 import FormTemplate from '../components/FormTemplate';
+import ControlTemplate from '../components/ControlTemplate';
 
 class FormContainer extends React.Component {
   constructor(props) {
@@ -11,22 +12,47 @@ class FormContainer extends React.Component {
     this.handleFormSave = handleFormSave.bind(this);
     this.handleDeleteForm = handleDeleteForm.bind(this);
     this.handleUpdateForm = handleUpdateForm.bind(this);
+    this.handleUpdateFormControl = handleUpdateFormControl.bind(this);
+    this.boundActionUpdateForm = bindActionCreators(updateFormValues, this.props.dispatch);
+    this.boundActionSaveForm = bindActionCreators(saveForm, this.props.dispatch);
+    this.boundActionDeleteForm = bindActionCreators(deleteForm, this.props.dispatch);
+    this.boundActionUpdateFormControl = bindActionCreators(updateFormControl, this.props.dispatch);
   }
 
   render() {
-    let boundActionUpdateForm = bindActionCreators(updateFormValues, this.props.dispatch);
-    let boundActionSaveForm = bindActionCreators(saveForm, this.props.dispatch);
-    let boundActionDeleteForm = bindActionCreators(deleteForm, this.props.dispatch);
+    let controls = this.props.controls.map((ctrl) => {
+      return (
+        <ControlTemplate
+          key={ctrl._id}
+          isNested={true}
+          {...ctrl}
+          handleUpdateControl={this.handleUpdateFormControl}
+          updateControlValues={this.boundActionUpdateFormControl}
+        />
+      );
+    });
     return (
-      <FormTemplate
-        {...this.props}
-        saveForm={boundActionSaveForm}
-        deleteForm={boundActionDeleteForm}
-        updateFormValues={boundActionUpdateForm}
-        handleFormSave={this.handleFormSave}
-        handleDeleteForm={this.handleDeleteForm}
-        handleUpdateForm={this.handleUpdateForm}
-      />
+      <div>
+        <FormTemplate
+          {...this.props}
+          saveForm={this.boundActionSaveForm}
+          deleteForm={this.boundActionDeleteForm}
+          updateFormValues={this.boundActionUpdateForm}
+          handleFormSave={this.handleFormSave}
+          handleDeleteForm={this.handleDeleteForm}
+          handleUpdateForm={this.handleUpdateForm}
+        />
+        {controls}
+        <button
+          className="btn save"
+          onClick={ (event) => {
+            event.preventDefault();
+            this.handleFormSave(this.boundActionSaveForm, this.props._id)
+          }}
+        >
+        Save
+        </button>
+      </div>
     );
   }
 };

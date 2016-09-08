@@ -1,4 +1,4 @@
-import {UPDATE_FORM, SET_ACTIVE_FORM} from '../actionTypes/form';
+import {UPDATE_FORM, SET_ACTIVE_FORM, ADD_CONTROL, UPDATE_FORM_CONTROL} from '../actionTypes/form';
 import request from 'superagent';
 import {url} from '../constants/api';
 import debug from 'debug';
@@ -23,6 +23,23 @@ export function setActiveForm(form) {
   };
 };
 
+export function addControl(control) {
+  return {
+    type: ADD_CONTROL,
+    payload: control
+  };
+};
+
+export function updateFormControl(id, key, value) {
+  return {
+    type: UPDATE_FORM_CONTROL,
+    payload: {
+      id: id,
+      key: key,
+      value: value
+    }
+  };
+};
 
 export function saveForm(_id) {
   return (dispatch) => {
