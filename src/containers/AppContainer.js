@@ -2,9 +2,9 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {loadForms, loadControls} from '../actions/app';
-import {setActiveForm} from '../actions/form';
+import {setActiveForm, addControl} from '../actions/form';
 import {setActiveControl} from '../actions/control';
-import {handleSetForms, handleSetControls, handleSetActiveForm, handleSetActiveControl} from '../handlers/shared';
+import {handleSetForms, handleSetControls, handleSetActiveForm, handleSetActiveControl, handleAddControl} from '../handlers/shared';
 import FormContainer from './FormContainer';
 import ControlContainer from './ControlContainer';
 import ListTemplate from '../components/ListTemplate';
@@ -17,6 +17,10 @@ class AppContainer extends React.Component {
     this.handleSetControls = handleSetControls.bind(this);
     this.handleSetActiveForm = handleSetActiveForm.bind(this);
     this.handleSetActiveControl = handleSetActiveControl.bind(this);
+    this.handleAddControl = handleAddControl.bind(this);
+    this.boundSetActiveForm = bindActionCreators(setActiveForm, this.props.dispatch);
+    this.boundSetActiveControl = bindActionCreators(setActiveControl, this.props.dispatch);
+    this.boundAddControl = bindActionCreators(addControl, this.props.dispatch);
   }
 
   componentWillMount() {
@@ -27,8 +31,6 @@ class AppContainer extends React.Component {
   }
 
   render() {
-    let boundSetActiveForm = bindActionCreators(setActiveForm, this.props.dispatch);
-    let boundSetActiveControl = bindActionCreators(setActiveControl, this.props.dispatch);
     return (
       <main className="main">
         { this.props.hasLoaded ?
@@ -38,7 +40,7 @@ class AppContainer extends React.Component {
               <ListTemplate
                 handleSetActive={this.handleSetActiveForm}
                 list={this.props.forms}
-                setActive={boundSetActiveForm}
+                setActive={this.boundSetActiveForm}
               />
             </section>
             <section className="section form">
@@ -48,11 +50,14 @@ class AppContainer extends React.Component {
               <h1>Controls</h1>
               <ListTemplate
                 handleSetActive={this.handleSetActiveControl}
+                handleAddControl={this.handleAddControl}
                 list={this.props.controls}
-                setActive={boundSetActiveControl}
+                setActive={this.boundSetActiveControl}
+                addControl={this.boundAddControl}
+                activeId={this.props.activeControlId}
               />
             </section>
-            <section className="section form">
+            <section className="section form control">
               <ControlContainer/>
             </section>
           </span>
@@ -75,7 +80,8 @@ function mapStateToProps(state) {
   return {
     hasLoaded: state.app.hasLoaded,
     forms: state.app.forms,
-    controls: state.app.controls
+    controls: state.app.controls,
+    activeControlId: state.control._id
   };
 };
 

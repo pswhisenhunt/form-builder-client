@@ -5,7 +5,7 @@ const InputTemplate = (props) => {
     <input
       className={props.classname}
       value={props.value}
-      onChange={ (event) => props.handleUpdate(props.update, props.name, event.target.value)}
+      onChange={ (event) => props.handleUpdate(props.update, props.id, props.name, event.target.value)}
       placeholder={props.placeholder}
     />
   );
@@ -20,7 +20,8 @@ InputTemplate.propTypes = {
   handleUpdate: React.PropTypes.func,
   update: React.PropTypes.func,
   name: React.PropTypes.string,
-  placeholder: React.PropTypes.string
+  placeholder: React.PropTypes.string,
+  id: React.PropTypes.string
 };
 
 export default InputTemplate;

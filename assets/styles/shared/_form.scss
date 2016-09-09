@@ -1,5 +1,4 @@
 .form {
-  min-height: 300px;
   .input-basic {
     height: 30px;
     border: none;
@@ -76,6 +75,20 @@
     cursor: pointer;
     i {
       margin: 5px;
+    }
+  }
+
+  .nested {
+    border: 1px solid $medium-green;
+    border-radius: 8px;
+    width: 300px;
+    padding: 10px;
+    margin: 0 auto;
+    margin-top: 8px;
+    .input-basic {
+      width: 200px;
+
+      font-size: 20px;
     }
   }
 };

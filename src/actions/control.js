@@ -6,10 +6,11 @@ import debug from 'debug';
 
 let log = debug('control:log');
 
-export function updateControlValues(key, value) {
+export function updateControlValues(id, key, value) {
   return {
     type: UPDATE_CONTROL,
     payload: {
+      id: id,
       key: key,
       value: value
     }

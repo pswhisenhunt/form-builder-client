@@ -1,4 +1,4 @@
-import {UPDATE_FORM, SET_ACTIVE_FORM} from '../actionTypes/form';
+import * as formActionTypes from '../actionTypes/form';
 import request from 'superagent';
 import {url} from '../constants/api';
 import debug from 'debug';
@@ -8,7 +8,7 @@ let log = debug('form:log');
 
 export function updateFormValues(key, value) {
   return {
-    type: UPDATE_FORM,
+    type: formActionTypes.UPDATE_FORM,
     payload: {
       key: key,
       value: value
@@ -18,8 +18,40 @@ export function updateFormValues(key, value) {
 
 export function setActiveForm(form) {
   return {
-    type: SET_ACTIVE_FORM,
+    type: formActionTypes.SET_ACTIVE_FORM,
     payload: form
+  };
+};
+
+export function addControl(control) {
+  return {
+    type: formActionTypes.ADD_CONTROL,
+    payload: control
+  };
+};
+
+export function updateFormControl(id, key, value) {
+  return {
+    type: formActionTypes.UPDATE_FORM_CONTROL,
+    payload: {
+      id: id,
+      key: key,
+      value: value
+    }
+  };
+};
+
+export function deleteFormControl(id) {
+  return {
+    type: formActionTypes.DELETE_FORM_CONTROL,
+    payload: id
+  };
+};
+
+export function addOptionsToFormControl(id) {
+  return {
+    type: formActionTypes.ADD_OPTIONS_TO_FORM_CONTROL,
+    payload: id
   };
 };
 
@@ -36,11 +68,17 @@ export function saveForm(_id) {
   };
 };
 
+
+function cleanForRequest(form) {
+  delete form['saved'];
+  delete form['option'];
+  return form;
+};
+
 export function createForm() {
   return (dispatch, getState) => {
     let state = getState();
-    let form = state.form;
-    delete form['saved'];
+    let form = cleanForRequest(state.form);
     request
       .post(url + '/forms')
       .send(form)
@@ -62,8 +100,7 @@ export function createForm() {
 export function updateForm(_id) {
   return (dispatch, getState) => {
     let state = getState();
-    let form = state.form;
-    delete form['saved'];
+    let form = cleanForRequest(state.form);
     request
       .put(url + '/forms/' + _id)
       .send(form)

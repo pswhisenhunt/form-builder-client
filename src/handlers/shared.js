@@ -13,3 +13,7 @@ export function handleSetControls(loadControls) {
 export function handleSetActiveControl(setActiveControl, control) {
   setActiveControl(control);
 };
+
+export function handleAddControl(addControl, control) {
+  addControl(control);
+};
