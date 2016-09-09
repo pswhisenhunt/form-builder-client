@@ -2,7 +2,8 @@ const initialState = {
   name: '',
   _id: '',
   controls: [],
-  saved: ''
+  saved: '',
+  option: ''
 };
 
 export default function form(state = initialState, action) {
@@ -38,17 +39,48 @@ export default function form(state = initialState, action) {
       };
       break;
     case 'UPDATE_FORM_CONTROL':
-      var ctrls = [].concat(state.controls);
-      ctrls.forEach((ctrl) => {
-        if (ctrl._id === action.payload.id) {
-          ctrl[action.payload.key] = action.payload.value;
-          return;
+      if (action.payload.key === 'option') {
+        return {
+          ...state,
+          option: action.payload.value
         };
+      } else {
+        var ctrls = [].concat(state.controls);
+        ctrls.forEach((ctrl) => {
+          if (ctrl._id === action.payload.id) {
+            ctrl[action.payload.key] = action.payload.value;
+            return;
+          };
+        });
+        return {
+          ...state,
+          controls: ctrls
+        };
+      }
+      break;
+    case 'DELETE_FORM_CONTROL':
+      var ctrls = [].concat(state.controls);
+      ctrls.forEach((ctrl, i) => {
+        if (ctrl._id == action.payload) {
+          ctrls.splice(i, 1);
+        }
       });
       return {
         ...state,
         controls: ctrls
       };
+      break;
+    case 'ADD_OPTIONS_TO_FORM_CONTROL':
+      let controls = [].concat(state.controls);
+      let ctrl = controls.filter((control) => {
+        return control._id === action.payload
+      });
+      ctrl[0].options.push(state.option);
+      return {
+        ...state,
+        controls: controls,
+        option: ''
+      }
       break;
     case 'DELETE_FORM_SUCCESSFUL':
       return Object.assign({}, state, initialState);

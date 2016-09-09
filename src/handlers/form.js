@@ -13,3 +13,12 @@ export function handleDeleteForm(deleteForm, _id) {
 export function handleUpdateFormControl(updateFormControl, _id, key, value) {
   updateFormControl(_id, key, value);
 };
+
+export function handleDeleteFormControl(deleteFormControl, _id) {
+  deleteFormControl(_id);
+};
+
+
+export function handleAddFormControlOption(addOptionsToFormControl, _id) {
+  addOptionsToFormControl(_id);
+};

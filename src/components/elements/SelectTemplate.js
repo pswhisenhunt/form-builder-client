@@ -17,9 +17,9 @@ const SelectTemplate = (props) => {
     <div>
       <label className="label">Add Select Options</label>
       <input name={props.name} className="input-select" onChange={(event) => {
-        props.handleUpdate(props.update, 'option', event.target.value);
+        props.handleUpdate(props.update, props.id, 'option', event.target.value);
       }}/>
-      <i className="fa fa-plus-circle fa-lg add" aria-hidden="true" onClick={(event) => {event.preventDefault(); props.handleAdd(props.submitOptions)}}></i>
+      <i className="fa fa-plus-circle fa-lg add" aria-hidden="true" onClick={(event) => {event.preventDefault(); props.handleAdd(props.submitOptions, props.id)}}></i>
       <div>
         {ops}
       </div>

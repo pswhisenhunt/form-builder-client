@@ -57,7 +57,7 @@ class AppContainer extends React.Component {
                 activeId={this.props.activeControlId}
               />
             </section>
-            <section className="section form">
+            <section className="section form control">
               <ControlContainer/>
             </section>
           </span>
